@@ -12,7 +12,12 @@
     "express": "~4.13.4",
     "hjs": "~0.0.6",
     "less-middleware": "1.0.x",
-    "morgan": "~1.7.0",  
+    "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "install": "^0.8.1",
+    "nodemon": "^1.10.2",
+    "npm": "^3.10.8"
   }
 }
