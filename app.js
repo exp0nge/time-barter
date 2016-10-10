@@ -5,10 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');             //Requiring routes (AS)
+var index = require('./routes/index');             //Requiring routes (AS)
 var users = require('./routes/users');
-
-console.log("working!!!");
 
 var app = express();                                //Loading the express app (AS)
 
@@ -25,7 +23,7 @@ app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);                               //Where we tell our routes to be used (AS)
+app.use('/', index);                               //Where we tell our routes to be used (AS)
 app.use('/users', users);
 
 // catch 404 and forward to error handler
