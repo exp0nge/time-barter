@@ -1,5 +1,5 @@
 {
-  "name": "Time Barter",
+  "name": "timeBarter",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,8 @@
     "hjs": "~0.0.6",
     "less-middleware": "1.0.x",
     "morgan": "~1.7.0",
+    "pg": "^6.1.0",
+    "sequelize": "^3.24.3",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
