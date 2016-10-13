@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');             //Requiring routes (AS)
 var users = require('./routes/users');
 var transaction = require('./routes/transaction');
+var barter = require('./routes/barter');
+
 
 var app = express();                                //Loading the express app (AS)
 
@@ -27,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);                               //Where we tell our routes to be used (AS)
 app.use('/users', users);
 app.use('/transaction', transaction);
+app.use('/barter', barter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {                  // 404 handling (AS)
