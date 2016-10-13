@@ -27,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);                               //Where we tell our routes to be used (AS)
 app.use('/users', users);
 app.use('/transaction', transaction);
+app.use('/barter', barter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {                  // 404 handling (AS)
