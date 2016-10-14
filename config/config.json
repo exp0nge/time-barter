@@ -4,19 +4,21 @@
     "password": "dev",
     "database": "timebarter_development",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "uri": "postgres://localhost:5432/timebarter_development"
   },
   "test": {
     "username": "root",
     "password": null,
-    "database": "database_test",
+    "database": "timebarter_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "uri": "postgres://localhost:5432/timebarter_test"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "database_production",
+    "database": "timebarter_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
