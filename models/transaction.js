@@ -1,21 +1,22 @@
 'use strict';
+
 module.exports = function(sequelize, DataTypes) {
   var Transaction = sequelize.define('Transaction', {
     id: {
-      DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
     initUsername: {
-      DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         nonEmpty: true
       }
     },
     secondaryUsername: {
-      DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         nonEmpty: true
