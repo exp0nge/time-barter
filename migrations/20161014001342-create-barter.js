@@ -1,18 +1,21 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable('barters', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      initUsername: {
+      title: {
         type: Sequelize.STRING
       },
-      secondaryUsername: {
+      slug: {
         type: Sequelize.STRING
+      },
+      body: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +28,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Transactions');
+    return queryInterface.dropTable('barters');
   }
 };
