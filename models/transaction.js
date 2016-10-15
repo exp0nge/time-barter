@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // Transaction.hasMany(models.Milestone);
+        Transaction.hasMany(models.Milestone);
       }
     }
   });

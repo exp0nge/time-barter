@@ -9,12 +9,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       startedAt: {
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
       completedAt: {
-        type: Sequelize.DATETIME
-      },
-      deadline: {
         type: Sequelize.DATE
       },
       updateRequests: {
@@ -22,8 +19,7 @@ module.exports = {
         defaultValue: 0
       },
       fulfilled: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: null
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
