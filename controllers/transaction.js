@@ -13,8 +13,8 @@ module.exports = {
       .get(simpleRoutes.redirectTo(TRANSACTION_BASE_URL))
       .post(this.create);
     router.get('/:id', this.show);
-    router.put('/accept/:id', this.accept);
-    router.put('/reject/:id', this.reject);
+    router.put('/:id/accept', this.accept);
+    router.put('/:id/reject', this.reject);
 
     return router;
   },
@@ -57,31 +57,53 @@ module.exports = {
       where: {
         id: req.params.id,
         $or: [
-          { initUsername: req.params.username },
-          { secondaryUsername: req.params.username }
+          { initUsername: req.params.username || "me" },
+          { secondaryUsername: req.params.username || "me" }
         ]
       }
     })
       .then((transaction) => {
-        res.json({'status': 'success'});
+        res.json(transaction);
+      })
+      .catch((err) => {
+        res.json(err);
       });
   },
   accept(req, res) {
-    res.json({'status': 'success'});
-
+    models.Transaction.findOne({
+      where: {
+        id: req.params.id,
+        secondaryUsername: req.params.username || "me"
+      }
+    })
+      .then((transaction) => {
+        if (transaction.accepted === null){
+          transaction.update({ accepted: true });
+          res.json(transaction);
+        } else {
+          // was rejected/accepted before, can't accept again
+          res.json({'status': 'error'});
+        }
+      })
+      .catch((err) => {
+        res.json(err);
+      });
   },
   reject(req, res) { // secondaryUsername can accept
     models.Transaction.findOne({
       where: {
         id: req.params.id,
-        secondaryUsername: req.params.username
+        secondaryUsername: req.params.username || "me"
       }
     })
       .then((transaction) => {
-        if (!transaction.accepted){
-          // was accepted before, can't reject
+        if (transaction.accepted === null){
+          transaction.update({ accepted: false });
+          res.json(transaction);
+        } else {
+          // was accepted before, can't reject, should cancel instead
+          res.json({'status': 'error'});
         }
-        res.json({'status': 'success'});
       });
   }
 

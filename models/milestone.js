@@ -1,5 +1,4 @@
 'use strict';
-const models = require('../models');
 
 module.exports = function(sequelize, DataTypes) {
   var Milestone = sequelize.define('Milestone', {
@@ -17,8 +16,6 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // one to many relationship to Transaction
-        // Milestone.hasOne(models.Transaction);
       }
     }
   });

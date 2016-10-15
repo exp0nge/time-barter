@@ -1,4 +1,6 @@
 'use strict';
+const models = require('../models');
+
 /*
 initUsername: Username of barter who initiated the trade
 secondaryUsername: Username of barter being initiated upon
@@ -32,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // create one to many relation to Job here
+        // Transaction.hasMany(models.Milestone);
       }
     }
   });
