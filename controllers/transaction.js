@@ -1,12 +1,17 @@
 const express = require('express');
 const models = require('../models');
+const simpleRoutes = require('../common/routes');
+
+const TRANSACTION_BASE_URL = '/transaction';
 
 module.exports = {
   registerRouter() {
     const router = express.Router();
 
     router.get('/', this.index);
-    router.post('/create', this.create);
+    router.route('/create')
+      .get(simpleRoutes.redirectTo(TRANSACTION_BASE_URL))
+      .post(this.create);
     router.get('/:id', this.show);
     router.put('/accept/:id', this.accept);
     router.put('/reject/:id', this.reject);
@@ -14,11 +19,12 @@ module.exports = {
     return router;
   },
   index(req, res) {
-    // LIST all transactions where req.params.username == initUsername or secondaryUsername
+    // LIST all transactions where req.params.username == initUsername or
+    // secondaryUsername
     models.Transaction.findAll({
       where: {
         $or: [
-          { initUsername: req.params.username },
+          { initUsername: req.params.username || "me" },
           { secondaryUsername: req.params.username }
         ]
       }
@@ -27,20 +33,22 @@ module.exports = {
         res.json(transactions);
       })
       .catch((err) => {
-        res.json(err);
+        res.status(500).json(err);
       });
   },
   create(req, res) {
+    console.log(req.body);
     // POST transaction
     models.Transaction.create({
-      initUsername: req.params.username,
+      // initUsername: req.params.username,
+      initUsername: "me",
       secondaryUsername: req.body.secondaryUsername
     })
       .then((transaction) => {
         res.json(transaction);
       })
       .catch((err) => {
-        res.json(err);
+        res.status(500).json(err);
       });
   },
   show(req, res) {

@@ -10,14 +10,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        nonEmpty: true
+        notEmpty: true
       }
     },
     secondaryUsername: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        nonEmpty: true
+        notEmpty: true
       }
     },
     accepted: {
