@@ -1,0 +1,17 @@
+Transaction
+============
+
+
+Initial Barter (A) requests Transaction from secondary barter (B) 
+
+create Transaction
+initUsername: A
+secondaryUsername: B
+accepted: null (not yet responded to)
+canceled: false (default)
+
+B can accept or reject =>
+	accept: update accepted: true -> notify A to create milestones
+		-> both A, B required to create milestones -> chat/messaging to allow negotiation
+		-> both A, B accept milestones => check milestone doc
+	reject: update accepted: false -> notify A of rejection

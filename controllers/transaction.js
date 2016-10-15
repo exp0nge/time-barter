@@ -8,27 +8,73 @@ module.exports = {
     router.get('/', this.index);
     router.post('/create', this.create);
     router.get('/:id', this.show);
-    router.put('/update/:id', this.update);
-    router.delete('/delete/:id', this.delete);
+    router.put('/accept/:id', this.accept);
+    router.put('/reject/:id', this.reject);
 
     return router;
   },
   index(req, res) {
-    // LIST all transactions
-    res.send('TODO');
+    // LIST all transactions where req.params.username == initUsername or secondaryUsername
+    models.Transaction.findAll({
+      where: {
+        $or: [
+          { initUsername: req.params.username },
+          { secondaryUsername: req.params.username }
+        ]
+      }
+    })
+      .then((transactions) => {
+        res.json(transactions);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
   },
   create(req, res) {
     // POST transaction
-    res.send('TODO');
+    models.Transaction.create({
+      initUsername: req.params.username,
+      secondaryUsername: req.body.secondaryUsername
+    })
+      .then((transaction) => {
+        res.json(transaction);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
   },
   show(req, res) {
-    res.send('TODO');
+    // show transaction where req.params.username == initUsername or secondaryUsername
+    models.Transaction.findOne({
+      where: {
+        id: req.params.id,
+        $or: [
+          { initUsername: req.params.username },
+          { secondaryUsername: req.params.username }
+        ]
+      }
+    })
+      .then((transaction) => {
+        res.json({'status': 'success'});
+      });
   },
-  update(req, res) {
-    res.send('TODO');
+  accept(req, res) {
+    res.json({'status': 'success'});
+
   },
-  delete(req, res) {
-    res.send('TODO');
+  reject(req, res) { // secondaryUsername can accept
+    models.Transaction.findOne({
+      where: {
+        id: req.params.id,
+        secondaryUsername: req.params.username
+      }
+    })
+      .then((transaction) => {
+        if (!transaction.accepted){
+          // was accepted before, can't reject
+        }
+        res.json({'status': 'success'});
+      });
   }
 
-}
+};

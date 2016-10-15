@@ -1,13 +1,11 @@
 'use strict';
+/*
+initUsername: Username of barter who initiated the trade
+secondaryUsername: Username of barter being initiated upon
+*/
 
 module.exports = function(sequelize, DataTypes) {
   var Transaction = sequelize.define('Transaction', {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false
-    },
     initUsername: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -21,7 +19,16 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         nonEmpty: true
       }
-    }
+    },
+    accepted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: null
+    },
+    canceled: { // valid only if responded === True
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    canceledReason: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
