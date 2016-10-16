@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+
 var app = express();                                //Loading the express app (AS)
 
 // view engine setup
@@ -19,6 +21,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+//Use express as middleware to serve static files
+//Serve up files that are in the public directory and use Express's static file handler to do so
+app.use('/public',express.static("public"));  
 
 app.use(require('./controllers/'));  // Sequelize routes
 
