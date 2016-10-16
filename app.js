@@ -24,9 +24,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Use express as middleware to serve static files
 //Serve up files that are in the public directory and use Express's static file handler to do so
-app.use('/public',express.static("public"));  
+app.use('/public',express.static("public"));
+
+//Handlebars config
+var exphbs = require('express3-handlebars');
+app.engine('handlebars',
+    exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars'); //Tell the app that the view engine property is also handlebars
 
 app.use(require('./controllers/'));  // Sequelize routes
+
+app.get('/', function(req,res) {
+    res.render('index');
+});
+
+app.get('/about', function(req,res) {
+    res.render('about');
+});
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {                  // 404 handling (AS)
