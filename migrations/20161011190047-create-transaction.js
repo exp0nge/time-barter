@@ -21,6 +21,17 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      accepted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: null
+      },
+      canceled: { // valid only if responded === True
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      canceledReason: {
+        type: Sequelize.TEXT
       }
     });
   },

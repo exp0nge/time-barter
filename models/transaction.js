@@ -1,30 +1,40 @@
 'use strict';
+const models = require('../models');
+
+/*
+initUsername: Username of barter who initiated the trade
+secondaryUsername: Username of barter being initiated upon
+*/
+
 module.exports = function(sequelize, DataTypes) {
   var Transaction = sequelize.define('Transaction', {
-    id: {
-      DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false
-    },
     initUsername: {
-      DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        nonEmpty: true
+        notEmpty: true
       }
     },
     secondaryUsername: {
-      DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        nonEmpty: true
+        notEmpty: true
       }
-    }
+    },
+    accepted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: null
+    },
+    canceled: { // valid only if responded === True
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    canceledReason: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {
-        // create one to many relation to Job here
+        Transaction.hasMany(models.Milestone);
       }
     }
   });
