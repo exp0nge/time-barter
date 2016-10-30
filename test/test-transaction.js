@@ -12,7 +12,7 @@ describe('Transaction', function(){
     chai.request(server)
       .get('/transaction')
       .end((err, res) => {
-        res.should.have.status(200);
+        res.have.status(200);
         done();
       });
   });
