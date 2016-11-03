@@ -1,25 +1,27 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('Milestones', {
+    return queryInterface.createTable('Ads', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      startedAt: {
-        type: Sequelize.DATE
+      username: {
+        type: Sequelize.STRING
       },
-      completedAt: {
-        type: Sequelize.DATE
+      title: {
+        type: Sequelize.STRING
       },
-      updateRequests: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+      description: {
+        type: Sequelize.TEXT
       },
-      fulfilled: {
-        type: Sequelize.BOOLEAN
+      phone: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -32,6 +34,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Milestones');
+    return queryInterface.dropTable('Ads');
   }
 };
