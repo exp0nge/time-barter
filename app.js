@@ -5,8 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
-
 var app = express();                                //Loading the express app (AS)
 
 // view engine setup
@@ -36,7 +34,6 @@ app.use(require('./controllers/'));  // Sequelize routes
 
 app.get('/', function(req,res) {
     var luckyNumber = Math.round(Math.random() * 10);
-
     res.render('index', {
         luckyNumber: luckyNumber
     });
@@ -45,9 +42,6 @@ app.get('/', function(req,res) {
 app.get('/about', function(req,res) {
     res.render('about');
 });
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {                  // 404 handling (AS)
