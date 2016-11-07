@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon -L app.js",
-    "test": "mocha --recursive test/"
+    "test": "mocha --recursive test/",
+    "sql": "sequelize"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -26,6 +27,7 @@
     "mocha": "^3.1.2",
     "nodemon": "^1.10.2",
     "npm": "^3.10.8",
-    "sequelize": "~3.24.3"
+    "sequelize": "~3.24.3",
+    "sequelize-cli": "^2.4.0"
   }
 }
