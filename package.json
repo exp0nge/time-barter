@@ -15,15 +15,15 @@
     "fs": "0.0.1-security",
     "hjs": "~0.0.6",
     "less-middleware": "1.0.x",
-    "mocha": "^3.1.2",
     "morgan": "~1.7.0",
     "pg": "~6.1.0",
-    "sequelize": "~3.24.3",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
     "install": "^0.8.1",
     "nodemon": "^1.10.2",
+    "mocha": "^3.1.2",
+    "sequelize": "~3.24.3",
     "npm": "^3.10.8"
   }
 }
