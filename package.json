@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/.bin/nodemon -L app.js",
-    "test": "node_modules/.bin/mocha --recursive test/"
+    "start": "nodemon -L app.js",
+    "test": "mocha --recursive test/"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
