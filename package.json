@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node_modules/.bin/nodemon -L app.js",
-	"test": "node_modules/.bin/mocha --recursive test/"
+    "test": "node_modules/.bin/mocha --recursive test/"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -20,10 +20,12 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "install": "^0.8.1",
-    "nodemon": "^1.10.2",
     "mocha": "^3.1.2",
-    "sequelize": "~3.24.3",
-    "npm": "^3.10.8"
+    "nodemon": "^1.10.2",
+    "npm": "^3.10.8",
+    "sequelize": "~3.24.3"
   }
 }
