@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon -L app.js",
+    "test": "mocha --recursive test/",
+    "sql": "sequelize"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -14,15 +16,18 @@
     "fs": "0.0.1-security",
     "hjs": "~0.0.6",
     "less-middleware": "1.0.x",
-    "mocha": "^3.1.2",
     "morgan": "~1.7.0",
     "pg": "~6.1.0",
-    "sequelize": "~3.24.3",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "install": "^0.8.1",
+    "mocha": "^3.1.2",
     "nodemon": "^1.10.2",
-    "npm": "^3.10.8"
+    "npm": "^3.10.8",
+    "sequelize": "~3.24.3",
+    "sequelize-cli": "^2.4.0"
   }
 }
