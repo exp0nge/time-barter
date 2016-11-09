@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon -L app.js",
     "test": "mocha --recursive test/",
-    "sql": "sequelize"
+    "sql": "node_modules/.bin/sequelize"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
