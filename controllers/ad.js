@@ -38,4 +38,19 @@ module.exports = {
 		res.render('Ad/:id');
 	},
 
+	update(req,res) {
+		//update :id
+	},
+	
+	deactivate(req,res) {
+		//deactivate :id
+	},
+	
+	activate(req,res) {
+		//activate :id
+	},
+	
+	delete(req,res) {
+		//delete :id
+	}
 };
