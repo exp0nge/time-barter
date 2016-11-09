@@ -47,3 +47,6 @@ jspm_packages
 
 ### Vagrant ###
 .vagrant/
+
+### Vim ###
+*.swp
