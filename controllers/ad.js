@@ -17,14 +17,15 @@ module.exports = {
 
 		router.post('/new', this.new);
 		router.get('/:id', this.id);
-		router.get('/');
+		router.get('/', this.index);
 		router.put('/:id/update', this.update);
 		router.put('/:id/deactivate', this.deactivate);
 		router.put('/:id/activate', this.activate);
 		router.delete('/:id/delete', this.delete);
 		return router;
 	},
-
+	index(req, res){
+	},
 	new(req, res) {
 		models.Ad.new({
 			username: req.Ad.username,
@@ -35,21 +36,25 @@ module.exports = {
 	},
 
 	id(req, res) {
-		res.render('Ad/:id');
+			res.render('ad/index', {
+				barter: 'username',
+				datetime: Date.now(),
+				role: 'Painter'
+			});
 	},
 
 	update(req,res) {
 		//update :id
 	},
-	
+
 	deactivate(req,res) {
 		//deactivate :id
 	},
-	
+
 	activate(req,res) {
 		//activate :id
 	},
-	
+
 	delete(req,res) {
 		//delete :id
 	}

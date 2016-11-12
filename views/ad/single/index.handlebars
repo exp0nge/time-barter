@@ -1,0 +1,69 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        {{{ role }}}
+      </h1>
+      <h2 class="subtitle">
+        {{{ barter }}} posted on {{{ datetime }}}
+      </h2>
+    </div>
+  </div>
+</section>
+
+<div class="section">
+  <div class="columns">
+    <div class="column is-2">
+      <aside class="menu container">
+        <p class="menu-label">
+          Ad
+        </p>
+        <ul class="menu-list">
+          <li><a href="#">Wanted</a></li>
+          <li><a href="#">Details</a></li>
+          <li><a href="#">Reputation</a></li>
+        </ul>
+        <p class="menu-label">
+          Actions
+        </p>
+        <ul class="menu-list">
+          <li><a href="#">Contact Barter</a></li>
+        </ul>
+
+      </aside>
+    </div>
+
+    <div class="column">
+      <section class="section">
+        <div class="container">
+          <div class="heading">
+            <h2 class="title">Wanted</h2>
+            <h3 class="subtitle">
+              {{{ barter }}} is specifically looking for
+            </h3>
+          </div>
+          <br>
+          <div class="">
+            {{{ wanted }}} balls
+          </div>
+        </div>
+      </section>
+
+
+      <section class="section">
+        <div class="container">
+          <div class="heading is-info">
+            <h2 class="title">Service</h2>
+            <h3 class="subtitle">
+              Details about the service
+            </h3>
+          </div>
+          <br>
+          <div class="">
+            {{{ ad.description }}}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
