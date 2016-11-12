@@ -25,18 +25,14 @@ module.exports = {
 		return router;
 	},
 	index(req, res){
+		res.render('ad/index');
 	},
 	new(req, res) {
-		models.Ad.new({
-			username: req.Ad.username,
-			title: req.Ad.title,
-			description: req.Ad.description,
-			email: req.Ad.username
-		});
+		res.render('ad/new/index');
 	},
 
 	id(req, res) {
-			res.render('ad/index', {
+			res.render('ad/single/index', {
 				barter: 'username',
 				datetime: Date.now(),
 				role: 'Painter'
@@ -45,6 +41,9 @@ module.exports = {
 
 	update(req,res) {
 		//update :id
+
+		res.render('ad/edit/index');
+
 	},
 
 	deactivate(req,res) {
