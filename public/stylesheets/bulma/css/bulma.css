@@ -3874,7 +3874,7 @@ a.box:active {
 }
 
 .nav-item img {
-  max-height: 24px;
+  max-height: 80px;
 }
 
 .nav-item .button + .button {
