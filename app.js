@@ -22,7 +22,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Use express as middleware to serve static files
 //Serve up files that are in the public directory and use Express's static file handler to do so
-app.use('/public',express.static("public"));
+app.use('/public', express.static("public"));
+
+app.get('/favicon.ico', function(req, res) {
+    res.sendStatus(200);
+});
 
 //Handlebars config
 var exphbs = require('express3-handlebars');
