@@ -15,9 +15,9 @@ module.exports = {
 	registerRouter() {
 		const router = express.Router();
 
-		router.post('/new', this.new);
-		router.get('/:id', this.id);
 		router.get('/', this.index);
+		router.post('/', this.new);
+		router.get('/:id', this.single);
 		router.put('/:id/update', this.update);
 		router.put('/:id/deactivate', this.deactivate);
 		router.put('/:id/activate', this.activate);
@@ -28,15 +28,43 @@ module.exports = {
 		res.render('ad/index');
 	},
 	new(req, res) {
-		res.render('ad/new/index');
-	},
-
-	id(req, res) {
-			res.render('ad/single/index', {
-				barter: 'username',
-				datetime: Date.now(),
-				role: 'Painter'
+		models.Ad.create({
+			username: req.body.email,
+			title: req.body.title,
+			description: req.body.description,
+			lookingFor: req.body.lookingFor,
+			phone: req.body.phone,
+			email: req.body.email
+		})
+			.then((ad) => {
+				res.redirect('/ad/' + ad.id);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.sendStatus(500);
 			});
+
+	},
+	single(req, res) {
+			models.Ad.findOne({
+				where: {
+					id: req.params.id
+				}
+			})
+				.then((ad) => {
+					if (!ad) {
+						res.render('404');
+					} else {
+						res.render('ad/single/index', {
+							ad: ad
+						});
+					}
+
+				})
+				.catch((err) => {
+					console.log(err);
+					res.sendStatus(500);
+				});
 	},
 
 	update(req,res) {

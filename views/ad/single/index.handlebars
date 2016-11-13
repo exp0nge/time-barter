@@ -2,10 +2,10 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-        {{{ role }}}
+        {{{ ad.title }}}
       </h1>
       <h2 class="subtitle">
-        {{{ barter }}} posted on {{{ datetime }}}
+        {{{ ad.username }}} posted on {{{ ad.createdAt }}}
       </h2>
     </div>
   </div>
@@ -19,8 +19,8 @@
           Ad
         </p>
         <ul class="menu-list">
-          <li><a href="#">Wanted</a></li>
-          <li><a href="#">Details</a></li>
+          <li><a href="#wanted">Wanted</a></li>
+          <li><a href="#details">Details</a></li>
           <li><a href="#">Reputation</a></li>
         </ul>
         <p class="menu-label">
@@ -37,14 +37,14 @@
       <section class="section">
         <div class="container">
           <div class="heading">
-            <h2 class="title">Wanted</h2>
+            <h2 class="title" id="wanted">Wanted</h2>
             <h3 class="subtitle">
-              {{{ barter }}} is specifically looking for
+              {{{ ad.username }}} is specifically looking for
             </h3>
           </div>
           <br>
           <div class="">
-            {{{ wanted }}}
+            {{{ ad.lookingFor }}}
           </div>
         </div>
       </section>
@@ -53,7 +53,7 @@
       <section class="section">
         <div class="container">
           <div class="heading is-info">
-            <h2 class="title">Service</h2>
+            <h2 class="title" id="details">Service</h2>
             <h3 class="subtitle">
               Details about the service
             </h3>
