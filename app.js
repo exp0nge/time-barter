@@ -27,22 +27,28 @@ app.use('/public', express.static("public"));
 
 //Handlebars config
 var exphbs = require('express3-handlebars');
+const helpers = require('./common/helpers');
 app.engine('handlebars',
-    exphbs({defaultLayout: 'main'}));
+    exphbs({
+      defaultLayout: 'main',
+      helpers: helpers
+    }));
+
 app.set('view engine', 'handlebars'); //Tell the app that the view engine property is also handlebars
 
 app.use(require('./controllers/'));  // Sequelize routes
 
 // Handle 404
  app.use(function(req, res) {
-    res.status(404);
-    res.render('404');
+  res.status(404);
+  res.render('404');
  });
 
  // Handle 500
  app.use(function(error, req, res, next) {
-    res.status(500);
-    res.render('500');
+  console.log(error);
+  res.status(500);
+  res.render('500');
  });
 
 // development error handler

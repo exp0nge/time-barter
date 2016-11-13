@@ -20,37 +20,27 @@
       </h2>
     </div>
     <br>
-    <div class="columns is-multiline is-mobile">
-      {{#each ads}}
-          <div class="box column is-4">
-            <article class="media">
-              <div class="media-left">
-                <figure class="image is-64x64">
-                  <img src="http://placehold.it/128x128" alt="Image">
-                </figure>
-              </div>
-              <a href="/ad/{{this.id}}">
-
-              <div class="media-content">
-                <div class="content">
-                  <p>
-                    <strong>{{this.username}}</strong> <small>{{this.createdAt}}</small>
-                    <br>
-                    {{this.description}}
-                    <br>
-                    Wanted
-                    <br>
-                    {{this.lookingFor}}
-                  </p>
-                </div>
-              </div>
-            </a>
-              
-            </article>
+      <div class="">
+        <div class="columns is-multiline">
+          {{#each ads}}
+          <div class="box  is-4 column" style="margin-right: 0px;">
+                  <a href="/ad/{{{this.id}}}">
+                    <p>
+                      <strong>@{{this.username}}</strong> <br>
+                      <small>{{this.createdAt}}</small>
+                      <br>
+                      {{this.description}}
+                      <br>
+                      Wanted
+                      <br>
+                      {{this.lookingFor}}
+                    </p>
+                  </a>
           </div>
-      {{/each}}
-      <br>
-    </div>
+          {{/each}}
+          <br>
+        </div>
+      </div>
 
 
   </div>
