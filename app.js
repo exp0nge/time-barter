@@ -33,20 +33,17 @@ app.set('view engine', 'handlebars'); //Tell the app that the view engine proper
 
 app.use(require('./controllers/'));  // Sequelize routes
 
+// Handle 404
+ app.use(function(req, res) {
+    res.status(404);
+    res.render('404');
+ });
 
-
-app.get('/about', function(req,res) {
-    res.render('about');
-});
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {                  // 404 handling (AS)
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
+ // Handle 500
+ app.use(function(error, req, res, next) {
+    res.status(500);
+    res.render('500');
+ });
 
 // development error handler
 // will print stacktrace

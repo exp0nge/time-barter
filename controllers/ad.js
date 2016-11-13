@@ -22,6 +22,8 @@ module.exports = {
 		router.put('/:id/update', this.update);
 		router.put('/:id/deactivate', this.deactivate);
 		router.put('/:id/activate', this.activate);
+		
+		router.post('/:id/delete', this.delete);
 		router.delete('/:id/delete', this.delete);
 		return router;
 	},
@@ -42,7 +44,7 @@ module.exports = {
 	},
 	create(req, res) {
 		models.Ad.create({
-			username: req.body.email,
+			username: req.body.username,
 			title: req.body.title,
 			description: req.body.description,
 			lookingFor: req.body.lookingFor,
@@ -97,5 +99,18 @@ module.exports = {
 
 	delete(req,res) {
 		//delete :id
+		models.Ad.destroy({
+			where: {
+				//username: req.user.username,
+				id: req.params.id
+			}
+		})
+			.then(() => {
+				res.render('ad/edit/delete-success');
+			})
+			.catch((err) => {
+				res.status(500);
+				res.render('500');
+			})
 	}
 };

@@ -27,7 +27,13 @@
           Actions
         </p>
         <ul class="menu-list">
-          <li><a href="#">Contact Barter</a></li>
+          <li><a href="mailto:{{{ ad.email }}}">Contact Barter</a></li>
+          <hr>
+          <li>
+              <form id="deleteForm" action="/ad/{{{ad.id}}}/delete" method="post">
+                <a onclick="deleteForm.submit();" class="button is-danger">Delete</a>
+              </form>
+          </li>
         </ul>
 
       </aside>
