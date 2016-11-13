@@ -33,12 +33,7 @@ app.set('view engine', 'handlebars'); //Tell the app that the view engine proper
 
 app.use(require('./controllers/'));  // Sequelize routes
 
-app.get('/', function(req,res) {
-    var luckyNumber = Math.round(Math.random() * 10);
-    res.render('index', {
-        luckyNumber: luckyNumber
-    });
-});
+
 
 app.get('/about', function(req,res) {
     res.render('about');

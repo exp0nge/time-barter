@@ -16,7 +16,8 @@ module.exports = {
 		const router = express.Router();
 
 		router.get('/', this.index);
-		router.post('/', this.new);
+		router.get('/add', this.add);
+		router.post('/', this.create);
 		router.get('/:id', this.single);
 		router.put('/:id/update', this.update);
 		router.put('/:id/deactivate', this.deactivate);
@@ -25,9 +26,21 @@ module.exports = {
 		return router;
 	},
 	index(req, res){
-		res.render('ad/index');
+		models.Ad.findAll(
+			// {
+			// 	where: {
+			// 		username: req.user.username || 'md'
+			// 	}
+			// }
+		)
+			.then((ads) => {
+				res.render('ad/index', { ads: ads });
+			});
 	},
-	new(req, res) {
+	add(req, res){
+		res.render('ad/new/add');
+	},
+	create(req, res) {
 		models.Ad.create({
 			username: req.body.email,
 			title: req.body.title,

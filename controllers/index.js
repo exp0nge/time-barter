@@ -1,4 +1,6 @@
 const express = require('express');
+const models = require('../models');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -14,26 +16,11 @@ fs
     router.use(`/${fileName}`, require(`./${fileName}`).registerRouter());
   });
 
-router.get('/testing', function(req, res){
-    res.send('ok');
-});
-
-router.get('/hjs', function(req, res){
-    res.render('index', {
-        title: 'My beautiful app',
-        age: 21
-    });
-});
-
-router.get('/abc', function(req,res) {
-    console.log(req.query);
-    //If I do /abc?age=5&name=anthony
-    //It will return { age: '5', name: 'anthony' }
-});
-
-router.get('/users/:id', function(req,res) {
-    console.log(req.params);
-    res.send(req.params.id, 200);
+router.get('/', function(req, res){
+    models.Ad.findAll()
+      .then((ads) => {
+        res.render('index', { ads: ads });
+      });
 });
 
 
