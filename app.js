@@ -5,14 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var app = express();                                //Loading the express app (AS)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));    //Setting default views to the view directory (AS)
 app.set('view engine', 'hjs');                      //Setting view engine to use hogan templates (AS)
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,35 +23,33 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Use express as middleware to serve static files
 //Serve up files that are in the public directory and use Express's static file handler to do so
-app.use('/public',express.static("public"));
+app.use('/public', express.static("public"));
 
 //Handlebars config
 var exphbs = require('express3-handlebars');
+const helpers = require('./common/helpers');
 app.engine('handlebars',
-    exphbs({defaultLayout: 'main'}));
+    exphbs({
+      defaultLayout: 'main',
+      helpers: helpers
+    }));
+
 app.set('view engine', 'handlebars'); //Tell the app that the view engine property is also handlebars
 
 app.use(require('./controllers/'));  // Sequelize routes
 
-app.get('/', function(req,res) {
-    var luckyNumber = Math.round(Math.random() * 10);
-    res.render('index', {
-        luckyNumber: luckyNumber
-    });
-});
+// Handle 404
+ app.use(function(req, res) {
+  res.status(404);
+  res.render('404');
+ });
 
-app.get('/about', function(req,res) {
-    res.render('about');
-});
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {                  // 404 handling (AS)
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
+ // Handle 500
+ app.use(function(error, req, res, next) {
+  console.log(error);
+  res.status(500);
+  res.render('500');
+ });
 
 // development error handler
 // will print stacktrace

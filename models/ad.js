@@ -22,6 +22,9 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     },
+    lookingFor: {
+      type: DataTypes.TEXT
+    },
     phone: {
       type: DataTypes.STRING
     },

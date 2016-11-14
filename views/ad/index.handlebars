@@ -1,0 +1,47 @@
+<section class="hero is-primary">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Your Active Posts
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline is-mobile">
+      {{#each ads}}
+          {{#if (eq this.username 'md')}}
+            <div class="box column is-4">
+              <article class="media">
+                <div class="media-left">
+                  <figure class="image is-64x64">
+                    <img src="http://placehold.it/128x128" alt="Image">
+                  </figure>
+                </div>
+                <a href="/ad/{{this.id}}">
+
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>{{this.username}}</strong> <small>{{this.createdAt}}</small>
+                      <br>
+                      {{this.description}}
+                      <br>
+                      Wanted
+                      <br>
+                      {{this.lookingFor}}
+                    </p>
+                  </div>
+                </div>
+              </a>
+
+              </article>
+            </div>
+          {{/if}}
+      {{/each}}
+      <br>
+    </div>
+  </div>
+</section>

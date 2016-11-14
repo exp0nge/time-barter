@@ -1,11 +1,69 @@
-<html>
+<!doctype html>
+
+<html lang="en">
 <head>
-    <title>{{ title }}</title>
+  <meta charset="utf-8">
+
+  <title>Time Barter | Services for services</title>
+  <meta name="description" content="A cashless marketplace">
+  <meta name="author" content="MD Islam, Jean Pena, Anthony Shalagin">
+
+  <link rel="stylesheet" href="/public/stylesheets/bulma/css/bulma.css">
+  <link rel="stylesheet" href="/public/stylesheets/font-awesome-4.7.0/css/font-awesome.css">
+
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
 </head>
-
 <body>
-    <h1>{{ title }}</h1>
-    <p> I am {{ age }} years old.</p>
-</body>
 
+  <nav class="nav">
+    <div class="nav-left">
+      <a class="nav-item is-brand" href="/">
+      <img src="/public/images/logo.png" alt="Bulma logo">
+    </a>
+    </div>
+
+    <div class="nav-center">
+      <span class="nav-item">
+        <a class="button is-primary is-medium" href="/ad/add">
+          <span>Post</span>
+        </a>
+      </span>
+    </div>
+
+    <span class="nav-toggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+
+    <div class="nav-right nav-menu">
+      <a class="nav-item" href="/">
+        Home
+      </a>
+
+    </div>
+  </nav>
+
+
+
+
+    {{{ body }}}
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>Time Barter</strong> by
+        <a href="https://github.com/exp0nge">MD R. Islam</a>,
+        <a href="https://github.com/SupaStuff">Jean Pena</a>,
+        and <a href="https://github.com/AnthonyShalagin">Anthony Shalagin</a>
+      </p>
+    </div>
+  </div>
+</footer>
+</body>
 </html>

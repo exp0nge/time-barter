@@ -15,42 +15,102 @@ module.exports = {
 	registerRouter() {
 		const router = express.Router();
 
-		router.post('/new', this.new);
-		router.get('/:id', this.id);
-		router.get('/');
+		router.get('/', this.index);
+		router.get('/add', this.add);
+		router.post('/', this.create);
+		router.get('/:id', this.single);
 		router.put('/:id/update', this.update);
 		router.put('/:id/deactivate', this.deactivate);
 		router.put('/:id/activate', this.activate);
+		
+		router.post('/:id/delete', this.delete);
 		router.delete('/:id/delete', this.delete);
 		return router;
 	},
-
-	new(req, res) {
-		models.Ad.new({
-			username: req.Ad.username,
-			title: req.Ad.title,
-			description: req.Ad.description,
-			email: req.Ad.username
-		});
+	index(req, res){
+		models.Ad.findAll(
+			// {
+			// 	where: {
+			// 		username: req.user.username || 'md'
+			// 	}
+			// }
+		)
+			.then((ads) => {
+				res.render('ad/index', { ads: ads });
+			});
 	},
+	add(req, res){
+		res.render('ad/new/add');
+	},
+	create(req, res) {
+		models.Ad.create({
+			username: req.body.username,
+			title: req.body.title,
+			description: req.body.description,
+			lookingFor: req.body.lookingFor,
+			phone: req.body.phone,
+			email: req.body.email
+		})
+			.then((ad) => {
+				res.redirect('/ad/' + ad.id);
+			})
+			.catch((err) => {
+				console.log(err);
+				res.sendStatus(500);
+			});
 
-	id(req, res) {
-		res.render('Ad/:id');
+	},
+	single(req, res) {
+			models.Ad.findOne({
+				where: {
+					id: req.params.id
+				}
+			})
+				.then((ad) => {
+					if (!ad) {
+						res.render('404');
+					} else {
+						res.render('ad/single/index', {
+							ad: ad
+						});
+					}
+
+				})
+				.catch((err) => {
+					console.log(err);
+					res.sendStatus(500);
+				});
 	},
 
 	update(req,res) {
 		//update :id
+
+		res.render('ad/edit/index');
+
 	},
-	
+
 	deactivate(req,res) {
 		//deactivate :id
 	},
-	
+
 	activate(req,res) {
 		//activate :id
 	},
-	
+
 	delete(req,res) {
 		//delete :id
+		models.Ad.destroy({
+			where: {
+				//username: req.user.username,
+				id: req.params.id
+			}
+		})
+			.then(() => {
+				res.render('ad/edit/delete-success');
+			})
+			.catch((err) => {
+				res.status(500);
+				res.render('500');
+			})
 	}
 };

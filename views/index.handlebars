@@ -1,3 +1,47 @@
-This is index.handlebars
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Exchange services for services
+      </h1>
+      <h2 class="subtitle">
+        A peer-to-peer cashless platform
+      </h2>
+    </div>
+  </div>
+</section>
 
-Hello, your lucky number today is:  {{ luckyNumber }}
+<section class="section">
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">Services Stream</h1>
+      <h2 class="subtitle">
+        Some of the services that are currently being offered
+      </h2>
+    </div>
+    <br>
+      <div class="">
+        <div class="columns is-multiline">
+          {{#each ads}}
+          <div class="box  is-4 column" style="margin-right: 0px;">
+                  <a href="/ad/{{{this.id}}}">
+                    <p>
+                      <strong>@{{this.username}}</strong> <br>
+                      <small>{{this.createdAt}}</small>
+                      <br>
+                      {{this.description}}
+                      <br>
+                      Wanted
+                      <br>
+                      {{this.lookingFor}}
+                    </p>
+                  </a>
+          </div>
+          {{/each}}
+          <br>
+        </div>
+      </div>
+
+
+  </div>
+</section>
