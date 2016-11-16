@@ -5,7 +5,8 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "test": "mocha --recursive test/",
-    "sql": "sequelize"
+    "sql": "sequelize",
+    "webpack": "webpack-dev-server --hot --progress --colors"
   },
   "dependencies": {
     "body-parser": "~1.15.1",
@@ -21,13 +22,27 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "babel-loader": "^6.2.7",
+    "bulma": "^0.2.3",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "font-awesome": "^4.7.0",
+    "http-server": "^0.9.0",
     "install": "^0.8.1",
+    "jsx-loader": "^0.13.2",
     "mocha": "^3.1.2",
+    "node-sass": "^3.13.0",
     "nodemon": "^1.10.2",
     "npm": "^3.10.8",
+    "react": "^15.3.2",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "sass-loader": "^4.0.2",
     "sequelize": "~3.24.3",
-    "sequelize-cli": "^2.4.0"
+    "sequelize-cli": "^2.4.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }
