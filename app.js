@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session')
+var passport = require('./middlewares/auth');
 
 
 var app = express();                                //Loading the express app (AS)
@@ -36,7 +38,20 @@ app.engine('handlebars',
 
 app.set('view engine', 'handlebars'); //Tell the app that the view engine property is also handlebars
 
+// Passport.js
+app.use(session({ secret: 'randomSecret' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
+
+
 app.use(require('./controllers/'));  // Sequelize routes
+
+
 
 // Handle 404
  app.use(function(req, res) {
@@ -72,6 +87,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

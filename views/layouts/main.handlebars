@@ -43,6 +43,18 @@
       <a class="nav-item" href="/">
         Home
       </a>
+      {{#if user}}
+      <a class="nav-item" href="/user/logout">
+          Logout
+      </a>
+      {{ else }}
+      <a class="nav-item" href="/user/register">
+          Register
+      </a>
+      <a class="nav-item" href="/user/login">
+          Login
+      </a>
+      {{/if}}
 
     </div>
   </nav>

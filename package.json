@@ -8,15 +8,20 @@
     "sql": "sequelize"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
+    "express-session": "^1.14.2",
     "express3-handlebars": "^0.5.2",
     "fs": "0.0.1-security",
     "hjs": "~0.0.6",
     "less-middleware": "1.0.x",
     "morgan": "~1.7.0",
+    "nodemon": "^1.10.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "pg": "~6.1.0",
     "serve-favicon": "~2.3.0"
   },
@@ -25,7 +30,6 @@
     "chai-http": "^3.0.0",
     "install": "^0.8.1",
     "mocha": "^3.1.2",
-    "nodemon": "^1.10.2",
     "npm": "^3.10.8",
     "sequelize": "~3.24.3",
     "sequelize-cli": "^2.4.0"

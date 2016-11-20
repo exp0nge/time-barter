@@ -22,7 +22,7 @@ module.exports = {
 		router.put('/:id/update', this.update);
 		router.put('/:id/deactivate', this.deactivate);
 		router.put('/:id/activate', this.activate);
-		
+
 		router.post('/:id/delete', this.delete);
 		router.delete('/:id/delete', this.delete);
 		return router;
