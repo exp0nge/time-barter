@@ -19,7 +19,15 @@ fs
 router.get('/', function(req, res){
     models.Ad.findAll()
       .then((ads) => {
-        res.render('index', { ads: ads });
+          ads.forEach((ad) => {
+              models.User.findById(ad.UserId)
+                .then((user) => {
+                    ad.user = user;
+                });
+          });
+
+          res.render('index', { ads: ads });
+          
       });
 });
 

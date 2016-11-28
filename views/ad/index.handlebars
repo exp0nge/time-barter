@@ -12,7 +12,7 @@
   <div class="container">
     <div class="columns is-multiline is-mobile">
       {{#each ads}}
-          {{#if (eq this.username 'md')}}
+          {{#if (eq this.username user.username)}}
             <div class="box column is-4">
               <article class="media">
                 <div class="media-left">
