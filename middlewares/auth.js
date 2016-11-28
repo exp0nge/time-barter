@@ -9,13 +9,13 @@ Src: https://github.com/medgardo/ctp-microblog/blob/master/blog/middlewares/auth
 */
 
 passport.use(new LocalStrategy({
-        usernameField: 'email'
+        usernameField: 'username'
     },
-    (email, passwd, done) => {
+    (username, passwd, done) => {
         console.log('in passport localstrat');
         models.User.findOne({
                 where: {
-                    email: email
+                    username: username
                 }
             })
             .then((user) => {

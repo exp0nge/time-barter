@@ -29,11 +29,11 @@ module.exports = {
 	},
 	index(req, res){
 		models.Ad.findAll(
-			// {
-			// 	where: {
-			// 		username: req.user.username || 'md'
-			// 	}
-			// }
+			{
+				where: {
+					username: req.user.email
+				}
+			}
 		)
 			.then((ads) => {
 				res.render('ad/index', { ads: ads });
@@ -44,12 +44,12 @@ module.exports = {
 	},
 	create(req, res) {
 		models.Ad.create({
-			username: req.body.username,
+			username: req.user.email,
 			title: req.body.title,
 			description: req.body.description,
 			lookingFor: req.body.lookingFor,
 			phone: req.body.phone,
-			email: req.body.email
+			email: req.user.email
 		})
 			.then((ad) => {
 				res.redirect('/ad/' + ad.id);

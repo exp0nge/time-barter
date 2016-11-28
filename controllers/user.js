@@ -38,6 +38,7 @@ module.exports = {
             }
             models.User.create({
                     email: req.body.email,
+                    username: req.body.username,
                     phone: req.body.phone,
                     password: hash
                 })
