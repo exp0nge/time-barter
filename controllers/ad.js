@@ -1,5 +1,6 @@
 const express = require('express');
 const models = require('../models');
+const passport = require('../middlewares/auth');
 
 /*
 POST /new
@@ -16,7 +17,7 @@ module.exports = {
         const router = express.Router();
 
         router.get('/', this.index);
-        router.get('/add', this.add);
+        router.get('/add', passport.authenticate('local'), this.add);
         router.post('/', this.create);
         router.get('/:id', this.single);
         router.put('/:id/update', this.update);
