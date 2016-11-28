@@ -1,6 +1,6 @@
 const express = require('express');
 const models = require('../models');
-const passport = require('../middlewares/auth');
+const utils = require('../middlewares/auth-utils');
 
 /*
 POST /new
@@ -16,13 +16,13 @@ module.exports = {
     registerRouter() {
         const router = express.Router();
 
-        router.get('/', this.index);
-        router.get('/add', passport.authenticate('local'), this.add);
-        router.post('/', this.create);
+        router.get('/', utils.loggedIn, this.index);
+        router.get('/add', utils.loggedIn, this.add);
+        router.post('/', utils.loggedIn, this.create);
         router.get('/:id', this.single);
-        router.put('/:id/update', this.update);
-        router.put('/:id/deactivate', this.deactivate);
-        router.put('/:id/activate', this.activate);
+        router.put('/:id/update', utils.loggedIn, this.update);
+        router.put('/:id/deactivate', utils.loggedIn, this.deactivate);
+        router.put('/:id/activate', utils.loggedIn, this.activate);
 
         router.post('/:id/delete', this.delete);
         router.delete('/:id/delete', this.delete);
