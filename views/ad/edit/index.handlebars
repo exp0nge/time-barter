@@ -7,3 +7,33 @@
     </div>
   </div>
 </section>
+
+<section class="section">
+  <div class="container">
+    <form class="box" action="/ad/{{ad.id}}/update" method="post">
+      <div class="columns">
+        <div class="column is-8">
+          <label class="label" for="title">Title</label>
+          <p class="control">
+            <input type="text" name="title" value="{{ad.title}}" class="input" required>
+          </p>
+
+        </div>
+      </div>
+
+      <label class="label" for="description">Description</label>
+      <p class="control">
+        <textarea name="description" rows="8" cols="20" class="textarea" required>{{ad.description}}</textarea>
+      </p>
+
+      <label class="label" for="lookingFor">Wanted</label>
+      <p class="control">
+        <textarea name="lookingFor" rows="8" cols="20" class="textarea" required>{{ad.lookingFor}}</textarea>
+      </p>
+
+      <button class="button is-primary">Submit</button>
+
+    </form>
+
+  </div>
+</section>

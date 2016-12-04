@@ -29,13 +29,14 @@
         <ul class="menu-list">
           <li><a href="mailto:{{{ ad.user.email }}}">Contact Barter</a></li>
           <hr>
-          <li>
               {{#if (eq ad.user.username user.username)}}
+          <li>
               <form id="deleteForm" action="/ad/{{{ad.id}}}/delete" method="post">
                 <a onclick="deleteForm.submit();" class="button is-danger">Delete</a>
               </form>
-              {{/if}}
           </li>
+          <li><a href="/ad/{{ad.id}}/edit" class="button is-warning">Edit</a></li>
+          {{/if}}
         </ul>
 
       </aside>

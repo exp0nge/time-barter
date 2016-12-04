@@ -20,7 +20,8 @@ module.exports = {
         router.get('/add', utils.loggedIn, this.add);
         router.post('/', utils.loggedIn, this.create);
         router.get('/:id', this.single);
-        router.put('/:id/update', utils.loggedIn, this.update);
+        router.get('/:id/edit', utils.loggedIn, this.edit)
+        router.post('/:id/update', utils.loggedIn, this.update);
         router.put('/:id/deactivate', utils.loggedIn, this.deactivate);
         router.put('/:id/activate', utils.loggedIn, this.activate);
 
@@ -85,12 +86,43 @@ module.exports = {
                 res.sendStatus(500);
             });
     },
-
+    edit(req, res) {
+        models.Ad.findOne({
+                where: {
+                    UserId: String(req.user.id),
+                    id: req.params.id
+                }
+            })
+            .then((ad) => {
+                res.render('ad/edit/index', {
+                    ad: ad
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500);
+                res.render('500');
+            });
+    },
     update(req, res) {
         //update :id
-
-        res.render('ad/edit/index');
-
+        models.Ad.update({
+            title: req.body.title,
+            lookingFor: req.body.lookingFor,
+            description: req.body.description
+        }, {
+            where: {
+                id: req.params.id,
+                UserId: String(req.user.id)
+            }
+        })
+            .then(() => {
+                res.redirect('/ad/' + req.params.id);
+            })
+            .catch((err) => {
+                console.log(err);
+                res.sendStatus(500);
+            });
     },
 
     deactivate(req, res) {
@@ -116,6 +148,6 @@ module.exports = {
                 console.log(err);
                 res.status(500);
                 res.render('500');
-            })
+            });
     }
 };
