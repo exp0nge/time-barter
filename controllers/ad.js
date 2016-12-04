@@ -24,14 +24,14 @@ module.exports = {
         router.put('/:id/deactivate', utils.loggedIn, this.deactivate);
         router.put('/:id/activate', utils.loggedIn, this.activate);
 
-        router.post('/:id/delete', this.delete);
-        router.delete('/:id/delete', this.delete);
+        router.post('/:id/delete', utils.loggedIn, this.delete);
+        router.delete('/:id/delete', utils.loggedIn, this.delete);
         return router;
     },
     index(req, res) {
         models.Ad.findAll({
                 where: {
-                    UserId: req.user.id
+                    UserId: String(req.user.id)
                 }
             })
             .then((ads) => {
@@ -45,7 +45,7 @@ module.exports = {
     },
     create(req, res) {
         models.Ad.create({
-                UserId: req.user.id,
+                UserId: String(req.user.id),
                 title: req.body.title,
                 description: req.body.description,
                 lookingFor: req.body.lookingFor
@@ -105,7 +105,7 @@ module.exports = {
         //delete :id
         models.Ad.destroy({
                 where: {
-                    UserId: req.user.id,
+                    UserId: String(req.user.id),
                     id: req.params.id
                 }
             })
@@ -113,6 +113,7 @@ module.exports = {
                 res.render('ad/edit/delete-success');
             })
             .catch((err) => {
+                console.log(err);
                 res.status(500);
                 res.render('500');
             })

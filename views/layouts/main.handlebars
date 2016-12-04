@@ -27,9 +27,7 @@
 
     <div class="nav-center">
       <span class="nav-item">
-        <a class="button is-primary is-medium" href="/ad/add">
-          <span>Post</span>
-        </a>
+
       </span>
     </div>
 
@@ -40,12 +38,14 @@
     </span>
 
     <div class="nav-right nav-menu">
-      <a class="nav-item" href="/">
-        Home
-      </a>
+      <span class="nav-item">
+          <a class="button is-primary is-medium" href="/ad/add">
+            <span>Post</span>
+          </a>
+      </span>
       {{#if user}}
       <a class="nav-item" href="/user/logout">
-          Logout (@{{user.username}})
+          <span class="button disabled">Logout (@{{user.username}})</span>
       </a>
       {{ else }}
       <a class="nav-item" href="/user/register">

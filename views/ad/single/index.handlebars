@@ -30,9 +30,11 @@
           <li><a href="mailto:{{{ ad.email }}}">Contact Barter</a></li>
           <hr>
           <li>
+              {{#if (eq ad.user.username user.username)}}
               <form id="deleteForm" action="/ad/{{{ad.id}}}/delete" method="post">
                 <a onclick="deleteForm.submit();" class="button is-danger">Delete</a>
               </form>
+              {{/if}}
           </li>
         </ul>
 
