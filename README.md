@@ -1,10 +1,6 @@
-# Time Barter
+# ![logo](https://github.com/exp0nge/TimeBarter/blob/master/public/images/logo.png?raw=true)
 
 A platform that allows users to exchange services for services
-
-## Getting Started
-
-(Meant to be a reference for us to look back at)
 
 ## Documents
 
