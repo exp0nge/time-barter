@@ -1,78 +1,157 @@
 <section class="hero is-primary">
-  <div class="hero-body">
-    <div class="container">
-      <h1 class="title">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
         {{{ ad.title }}}
       </h1>
-      <h2 class="subtitle">
+            <h2 class="subtitle">
         @{{{ ad.user.username }}} posted on {{{ ad.createdAt }}}
       </h2>
+        </div>
     </div>
-  </div>
 </section>
 
 <div class="section">
-  <div class="columns">
-    <div class="column is-2">
-      <aside class="menu container">
-        <p class="menu-label">
-          Ad
-        </p>
-        <ul class="menu-list">
-          <li><a href="#wanted">Wanted</a></li>
-          <li><a href="#details">Details</a></li>
-          <li><a href="#">Reputation</a></li>
-        </ul>
-        <p class="menu-label">
-          Actions
-        </p>
-        <ul class="menu-list">
-          <li><a href="mailto:{{{ ad.user.email }}}">Contact Barter</a></li>
-          <hr>
-              {{#if (eq ad.user.username user.username)}}
-          <li>
-              <form id="deleteForm" action="/ad/{{{ad.id}}}/delete" method="post">
-                <a onclick="deleteForm.submit();" class="button is-danger">Delete</a>
-              </form>
-          </li>
-          <li><a href="/ad/{{ad.id}}/edit" class="button is-warning">Edit</a></li>
-          {{/if}}
-        </ul>
+    <div class="columns">
+        <div class="column is-2">
+            <aside class="menu container">
+                <p class="menu-label">
+                    Ad
+                </p>
+                <ul class="menu-list">
+                    <li><a href="#wanted">Wanted</a></li>
+                    <li><a href="#details">Details</a></li>
+                    <li><a href="#">Reputation</a></li>
+                </ul>
+                <p class="menu-label">
+                    Actions
+                </p>
+                <ul class="menu-list">
+                    <li><a href="mailto:{{{ ad.user.email }}}">Contact Barter</a></li>
+                    <hr>
+                    {{#if (eq ad.user.username user.username)}}
+                        <li>
+                            <form id="deleteForm" action="/ad/{{{ad.id}}}/delete" method="post">
+                                <a onclick="deleteForm.submit();" class="button is-danger">Delete</a>
+                            </form>
+                        </li>
+                        <li><a href="/ad/{{ad.id}}/edit" class="button is-warning">Edit</a></li>
+                    {{/if}}
+                </ul>
 
-      </aside>
-    </div>
+            </aside>
+        </div>
 
-    <div class="column">
-      <section class="section">
-        <div class="container">
-          <div class="heading">
-            <h2 class="title" id="wanted">Wanted</h2>
-            <h3 class="subtitle">
+        <div class="column is-8">
+            <section class="section">
+                <div class="container">
+                    <div class="heading">
+                        <h2 class="title" id="wanted">Wanted</h2>
+                        <h3 class="subtitle">
               @{{{ ad.user.username }}} is specifically looking for
             </h3>
-          </div>
-          <br>
-          <div class="">
-            {{{ ad.lookingFor }}}
-          </div>
-        </div>
-      </section>
+                    </div>
+                    <br>
+                    <div class="">
+                        {{{ ad.lookingFor }}}
+                    </div>
+                </div>
+            </section>
 
 
-      <section class="section">
-        <div class="container">
-          <div class="heading is-info">
-            <h2 class="title" id="details">Service</h2>
-            <h3 class="subtitle">
+            <section class="section">
+                <div class="container">
+                    <div class="heading is-info">
+                        <h2 class="title" id="details">Service</h2>
+                        <h3 class="subtitle">
               Details about the service
             </h3>
-          </div>
-          <br>
-          <div class="">
-            {{{ ad.description }}}
-          </div>
+                    </div>
+                    <br>
+                    <div class="">
+                        {{{ ad.description }}}
+                    </div>
+                </div>
+            </section>
         </div>
-      </section>
     </div>
-  </div>
 </div>
+
+
+
+
+
+<!-- chat -->
+{{#if user}}
+    <div id="live-chat">
+
+        <header class="clearfix">
+
+            <a href="#" class="chat-close">x</a>
+
+            <h4>Public chat for this ad | @{{ad.user.username}}</h4>
+
+            <span class="chat-message-counter">3</span>
+
+        </header>
+
+        <div class="chat">
+
+            <div class="chat-history" id="chatHistory">
+
+
+            </div>
+            <!-- end chat-history -->
+            <form class="form" action="#" method="post" id="chatForm">
+                    <p class="control has-addons">
+                        <input type="text" class="input is-expanded" placeholder="Type your message…" id="chatMessage">
+                        <input type="submit" class="button is-primary" value="Send">
+                    </p>
+            </form>
+        </div>
+        <!-- end chat -->
+
+    </div>
+    <!-- end live-chat -->
+{{/if}}
+
+
+<script src="/public/js/common/jquery-3.1.1.min.js" charset="utf-8"></script>
+<script src="/public/js/chat/chat.js" charset="utf-8"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    $(document).ready(function() {
+        var socket = io();
+        var chatMessage = $('#chatMessage');
+        var chatRoom = String({{ad.id}}) + '-bids';
+        var chatHistory = $('#chatHistory');
+        function addMessage(msg, username, datetime) {
+            var message = '<div class="chat-message-content clearfix">' +
+                '<span class="chat-time">' + datetime + '</span>' +
+                '<h5>@' + username + '</h5>' +
+                '<p>' + msg + '</p></div><hr>';
+            chatHistory.append(message);
+        }
+        socket.on('connect', function(){
+            socket.emit('join', {'channel': chatRoom, 'username': '{{user.username}}' }, function() {
+
+            });
+        });
+
+        socket.on('message', function(msgPayload) {
+            addMessage(msgPayload['message'], msgPayload['username'], msgPayload['datetime']);
+        });
+
+        $('#chatForm').submit(function(e) {
+            socket.emit('message', chatMessage.val());
+            chatMessage.val('');
+            e.preventDefault();
+        });
+
+        socket.on('error', function (msg) {
+            console.log(msg);
+        });
+
+    });
+</script>
